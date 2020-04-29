@@ -40,6 +40,15 @@ public class Powerup : MonoBehaviour
                     case 2:
                         playerPowerUp.ShieldPowerActive();
                         break;
+                    case 3:
+                        playerPowerUp.AmmoRefillActive();
+                        break;
+                    case 4:
+                        playerPowerUp.ExtraLifeActive();
+                        break;
+                    case 5:
+                        playerPowerUp.MultiShotActive();
+                        break;
                     default:
                         Debug.Log("Default values");
                             break;

@@ -16,6 +16,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text _pressRkeyText;
     private GameManager _gameManager;
+    [SerializeField]
+    private Scrollbar _thrusters;
+    private Scrollbar _thrusterValue;
    
     // Start is called before the first frame update
     void Start()
@@ -24,6 +27,7 @@ public class UIManager : MonoBehaviour
         _gameOverText.gameObject.SetActive(false);
         _pressRkeyText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
+        _thrusterValue = _thrusters.GetComponent<Scrollbar>();
 
         if (_gameManager == null)
         {
@@ -62,4 +66,29 @@ public class UIManager : MonoBehaviour
         _pressRkeyText.gameObject.SetActive(true);
         _gameManager.GameOver();
     }
+
+    public void ThrusterBarUp()
+    {
+
+        _thrusterValue.value += 1f;
+
+        if (_thrusterValue.value >= 1f)
+        {
+            _thrusterValue.value = 1f;             
+        }
+       
+    }
+     public void ThrusterBarDown()
+    {
+      
+        StartCoroutine(ThusterCooldownRoutine());
+
+    } 
+
+    IEnumerator ThusterCooldownRoutine()
+    {    
+            yield return new WaitForSeconds(2.0f);           
+            _thrusterValue.value = 0;           
+    }
+
 }
